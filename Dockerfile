@@ -1,4 +1,5 @@
-FROM ubuntu:latest
+# Ubuntu 23.10: mantic
+FROM ubuntu:mantic
 
 #environment variables for changing JDK, HADOOP versions and directoris
 ENV JDK_VER=16.0.1
@@ -33,11 +34,11 @@ ADD ./assets/${HADOOP_TAR_NAME} .
 
 #adding path variables and environment variables for HADOOP
 ENV HADOOP_HOME=/opt/hadoop-${HADOOP_VER}
-ENV HADOOP_STREAMING_JAR=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.3.1.jar
+ENV HADOOP_STREAMING_JAR=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-${HADOOP_VER}.jar
 ENV PATH=$PATH:$HADOOP_HOME
 ENV PATH=$PATH:$HADOOP_HOME/bin
 #after this all binaries are availabes ash shell comand, which means you can directly use 
-#$hdfs or $hadoop instad of /opt/hadoop-3.3.1/bin/hdfs or /opt/hadoop-3.3.1/bin/hadoop
+#$hdfs or $hadoop instad of /opt/hadoop-${HADOOP_VER}/bin/hdfs or /opt/hadoop-${HADOOP_VER}/bin/hadoop
 
 #***CONFIGURATION***#
 #adding hadoop configuration files
