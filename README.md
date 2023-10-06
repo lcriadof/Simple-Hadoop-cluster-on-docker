@@ -5,7 +5,7 @@
 # Simple Hadoop Cluster on Docker
 
 This is a very simple setup for Hadoop cluster using docker. Explanation for every command or step is written as comment in all files. 
-
+La versión 3.3.6	(2023 Jun 23	source) soporta la arquitecturas AMD64 y aarch64
 ## Structure:
 There are four major parts of this setup, 
 - **Assets** : This folder contains binaries for Hadoop and Java. Please download JDK 8.0 binaries and hadoop 3.3.1 binaries and rename them to hadoop.tar.gz and jdk.tar.gz and put them under folder 'assets' for it to work properly
