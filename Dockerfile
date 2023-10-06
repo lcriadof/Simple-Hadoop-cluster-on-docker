@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 #environment variables for changing JDK, HADOOP versions and directoris
 ENV JDK_VER=16.0.1
-ENV HADOOP_VER=3.3.1
+ENV HADOOP_VER=3.3.6
 ENV JDK_TAR_NAME=jdk.tar.gz
 ENV HADOOP_TAR_NAME=hadoop.tar.gz
 
