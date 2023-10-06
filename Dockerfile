@@ -20,7 +20,8 @@ RUN apt install -y arp-scan python3
 #***setup JDK***#
 WORKDIR /opt
 ADD ./assets/${JDK_TAR_NAME} .
-#ADD automatically untars
+#instalamos
+RUN tar -xzf ${JDK_TAR_NAME}
 
 #add path variables for JDK
 ENV JAVA_HOME=/opt/java-se-8u41-ri
@@ -31,6 +32,8 @@ ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
 
 #***setup hadoop***#
 ADD ./assets/${HADOOP_TAR_NAME} .
+# instalamos
+RUN tar -xzf ${HADOOP_TAR_NAME}
 
 #adding path variables and environment variables for HADOOP
 ENV HADOOP_HOME=/opt/hadoop-${HADOOP_VER}
