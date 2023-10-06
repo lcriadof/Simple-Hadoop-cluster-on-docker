@@ -6,7 +6,7 @@
 
 This is a very simple setup for Hadoop cluster using docker. Explanation for every command or step is written as comment in all files. 
 
-La versión 3.3.6	(2023 Jun 23	source) soporta la arquitecturas AMD64 y aarch64
+La versión 3.3.6	(2023 Jun 23	source) soporta la arquitecturas AMD64 y ARM64
 
 ## Structure:
 There are four major parts of this setup, 
