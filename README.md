@@ -10,10 +10,10 @@ La versión 3.3.6	(2023 Jun 23	source) soporta la arquitecturas AMD64 y ARM64
 
 ## Structure:
 There are four major parts of this setup, 
-- **Assets** : This folder contains binaries for Hadoop and Java. Please download JDK 8.0 binaries and hadoop 3.3.1 binaries and rename them to hadoop.tar.gz and jdk.tar.gz and put them under folder 'assets' for it to work properly
-- **Hadoop Base image** : This image contains configurations and setup of Hadoop and Java.
-- **Name Node** : This is located under /hdfs/namenode and extends to Hadoop Base Image. All configurations and assets required for this are located under same folder.
-- **Data Node**: Located under /hdfs/datanode. Mostly is same is same as Namenode just needs to start a different process thus it extends to Namenode instead of directly extending to Hadoop Base Image.
+- **Assets** : Esta carpeta contiene archivos binarios para Hadoop y Java. Descargue los binarios JDK 8.0 y hadoop 3.3.1 y cámbieles el nombre a hadoop.tar.gz y jdk.tar.gz y colóquelos en la carpeta 'activos' para que funcione correctamente.
+- **Hadoop Base image** : Esta imagen contiene configuraciones y ajustes de Hadoop y Java.
+- **Name Node** : Se encuentra en /hdfs/namenode y se extiende a la imagen base de Hadoop. Todas las configuraciones y recursos necesarios para esto se encuentran en la misma carpeta.
+- **Data Node**: Ubicado en /hdfs/datanode. En su mayoría es lo mismo, ya que Namenode solo necesita iniciar un proceso diferente, por lo que se extiende a Namenode en lugar de extenderse directamente a la imagen base de Hadoop.
 
 # Hadoop Base Image:
 This image lays the base for other images to be built on. First thing we need to do is install Hadoop and Java.
