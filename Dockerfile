@@ -1,26 +1,27 @@
 # Ubuntu 23.10: mantic
 FROM ubuntu:mantic
 
+# Argumento para especificar la arquitectura (por defecto amd64)
+ARG ARCH=amd64
+
 #environment variables for changing JDK, HADOOP versions and directoris
-ENV JDK_VER=16.0.1
+ENV JDK_VER=17.0.8.1
 ENV HADOOP_VER=3.3.6
-ENV JDK_TAR_NAME=jdk.tar.gz
-ENV HADOOP_TAR_NAME=hadoop.tar.gz
 
-
-#NOTE -- in case you want to install different JDK or HADOP version, 
-#download and put the file in ./assets folder and rename it to jdk.tar.gz and hadoop.tar.gz
-# OR change JDK_TAR_NAME and HADOOP_TAR_NAME above
-#YOU ALSO NEED TO CHANGE NAME IN 'JAVA_HOME' ENVIRONMENT VARIABLE BELOW SAME GOES FOR HADOOP
-
+# Determine los nombres de archivo JDK y Hadoop en función de la arquitectura
+ENV JDK_TAR_NAME=jdk.${ARCH}.tar.gz
+ENV HADOOP_TAR_NAME=hadoop.${ARCH}.tar.gz
+  
 #install basic utils and python
 RUN apt update
 RUN apt install -y arp-scan python3
 
 #***setup JDK***#
 WORKDIR /opt
-ADD ./assets/${JDK_TAR_NAME} .
-#instalamos
+
+# Copia el archivo JDK al contenedor sin extraerlo
+COPY ./assets/${JDK_TAR_NAME} .
+#descomprimimos e instalamos
 RUN tar -xzf ${JDK_TAR_NAME}
 
 #add path variables for JDK
@@ -31,7 +32,7 @@ ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
 #RUN java --version
 
 #***setup hadoop***#
-ADD ./assets/${HADOOP_TAR_NAME} .
+COPY ./assets/${HADOOP_TAR_NAME} .
 # instalamos
 RUN tar -xzf ${HADOOP_TAR_NAME}
 
