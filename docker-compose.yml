@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  namenode:
+    image: lcriadof/hadoop:3.3.6_namenode
+    deploy:
+      mode: replicated
+      replicas: 1
+    hostname: namenode-master
+    ports:
+      - "9870:9870"
+      - "50030:50030"
+    networks:
+      - dock_net
+
+  datanode:
+    image: lcriadof/hadoop:3.3.6_datanode
+    deploy:
+      mode: replicated
+    networks:
+      - dock_net
+
+networks:
+  dock_net:

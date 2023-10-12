@@ -4,9 +4,9 @@
 
 # Simple Hadoop Cluster on Docker
 
-Configuración simple para el clúster de Hadoop usando Docker.
+This is a very simple setup for Hadoop cluster using docker. Explanation for every command or step is written as comment in all files. 
 
-La versión 3.3.6 (2023 junio) soporta la arquitecturas AMD64 y ARM64
+La versión 3.3.6	(2023 Jun 23	source) soporta la arquitecturas AMD64 y ARM64
 
 ## Structure:
 There are four major parts of this setup, 
@@ -16,20 +16,10 @@ There are four major parts of this setup,
 - **Data Node**: Ubicado en /hdfs/datanode. En su mayoría es lo mismo, ya que Namenode solo necesita iniciar un proceso diferente, por lo que se extiende a Namenode en lugar de extenderse directamente a la imagen base de Hadoop.
 
 # Hadoop Base Image:
-This image lays the base for other images to be built on. 
-First thing we need to do is install Hadoop and Java.
+This image lays the base for other images to be built on. First thing we need to do is install Hadoop and Java.
 
-He utilizado
-ENV JDK_VER=17.0.8.1
-ENV HADOOP_VER=3.3.6
-
-docker pull lcriadof/hadoop:3.3.6_base
-
-Pero puede cambiarlo y recontruir la imagen
-Todas las configuraciones relacionadas con YARN deben realizarse aquí.
-Todas las instrucciones se pueden encontrar en **/Dockerfile**.
-
-
+I have provided Java 8 and Hadoop 3.3.1 but you can change it and rebuilt the image. All configurations related to YARN should be done here.
+All instructions can be found in **/Dockerfile**.
 
 ## Configurations:
 - **core-site.xml**: under /config-files are located common configurations. **core-site.xml**. Any configuration specific for NameNode or DataNode can also be done here or in there specific configuration file i.e. **hdfs-site.xml**

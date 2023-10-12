@@ -1,6 +1,4 @@
-FROM hadoop_base:1
-# !! IMPORTANT
-# make sure hadoop_base:1 is the name of the image you built.
+FROM lcriadof/hadoop:3.3.6_base
 
 # Create directories for namenode storage
 # specify multiple files if you want to create multiple storage files for redundancy

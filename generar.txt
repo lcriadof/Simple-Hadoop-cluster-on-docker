@@ -1,0 +1,49 @@
+
+
+# Construye la imagen base para AMD64 y ARM64
+--- multiplataforma  
+En este caso, como tenemos que ejecutar el dockerfile de manera manual por cada arquitectura no podemos 
+ejecutar algo del estilo:   docker buildx build --platform linux/amd64, linux/arm64/v8
+
+Hay que hacerlo por partes y luego unirlo
+
+
+PARTE 1:
+--------------
+# Construir y subir la imagen para amd64
+docker buildx build --platform linux/amd64 --build-arg ARCH=amd64 -t lcriadof/hadoop:3.3.6_base_amd64 --push .
+
+# Construir y subir la imagen para arm64
+docker buildx build --platform linux/arm64/v8 --build-arg ARCH=arm64 -t lcriadof/hadoop:3.3.6_base_arm64 --push .
+
+
+PARTE 2:
+-------------
+Unimos ambas imagenes en una nueva etiqutea DOCKER HUB
+
+//
+Una vez que hemos subido las imágenes (PARTE 1), vamos a crear nuestro manifiesto que genere 
+esa anhelada imagen Docker multiarquitectura. 
+Para ello simplemente vamos a ejecutar el comando ‘docker manifest create‘ 
+indicandole primero el tag de la nueva imagen y despues la lista de imagenes que lo componen
+
+Hay que seguir este orden de pasos:
+
+  1.- Tener en Docker local al menos una de las imágenes
+      docker pull lcriadof/hadoop:3.3.6_base_amd64
+
+  2.- Luego, usa el comando docker manifest create para crear el manifiesto que incluya referencias a las imágenes en diferentes arquitecturas. Asegúrate de que las etiquetas y nombres de las imágenes sean correctos.
+      docker manifest create lcriadof/hadoop:3.3.6_base lcriadof/hadoop:3.3.6_base_amd64 lcriadof/hadoop:3.3.6_base_arm64
+      
+      Si se ejecuta sin el paso 1 dárá este error:  no such manifest: docker.io/lcriadof/hadoop:3.3.6_base
+
+      
+  3.- Finalmente, usa el comando docker manifest push para subir el manifiesto al registro de Docker.
+      docker manifest push lcriadof/hadoop:3.3.6_base
+  
+    Esto enviará el manifiesto al registro de Docker y creará una entrada que representa la imagen multiplataforma.
+
+
+  
+# login
+docker login

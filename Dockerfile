@@ -1,16 +1,17 @@
 # Ubuntu 23.10: mantic
 FROM ubuntu:mantic
 
-# Argumento para especificar la arquitectura (por defecto amd64)
-ARG ARCH=amd64
+ARG ARCH
 
+# Establece las variables de entorno para las diferentes arquitecturas
+ENV JDK_TAR_NAME=jdk.${ARCH}.tar.gz 
+ENV HADOOP_TAR_NAME=hadoop.${ARCH}.tar.gz 
+
+       
 #environment variables for changing JDK, HADOOP versions and directoris
-ENV JDK_VER=17.0.8.1
+ENV JDK_VER=17.0.8
 ENV HADOOP_VER=3.3.6
 
-# Determine los nombres de archivo JDK y Hadoop en función de la arquitectura
-ENV JDK_TAR_NAME=jdk.${ARCH}.tar.gz
-ENV HADOOP_TAR_NAME=hadoop.${ARCH}.tar.gz
   
 #install basic utils and python
 RUN apt update
@@ -25,7 +26,7 @@ COPY ./assets/${JDK_TAR_NAME} .
 RUN tar -xzf ${JDK_TAR_NAME}
 
 #add path variables for JDK
-ENV JAVA_HOME=/opt/java-se-8u41-ri
+ENV JAVA_HOME=/opt/jdk-${JDK_VER}
 
 ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
 #TESTIGN

@@ -1,0 +1,9 @@
+# Construye la imagen base para AMD64 y ARM64
+# docker build -f Dockerfile -t lcriadof/hadoop:3.3.6_namenode .
+
+--- multiplataforma
+docker buildx build --platform linux/amd64,linux/arm64/v8 -t lcriadof/hadoop:3.3.6_namenode --push .
+
+
+
+docker login
